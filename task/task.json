@@ -1,0 +1,136 @@
+{
+	"id": "5580e6cb-b6c9-4844-bc4c-77c0ef1bde6b",
+	"name": "AppPoolSettings",
+	"friendlyName": "IIS Application Pool advanced settings",
+	"description": "Make advanced settings for IIS application pools",
+	"author": "delta-n",
+	"helpMarkDown": "This task manages advanced application pool settings for Microsoft Windows IIS",
+	"category": "Utility",
+	"visibility": [
+	  "Release"
+	],
+	"demands": [],
+	"version": {
+	  "Major": "0",
+	  "Minor": "1",
+	  "Patch": "0"
+	},
+	"minimumAgentVersion": "1.95.0",
+	"instanceNameFormat": "AppPoolSettings $(message)",
+	"groups": [
+		  {
+			  "name": "CPU",
+			  "displayName": "CPU",
+			  "isExpanded": true
+		  },
+		  {
+			"name": "ProcessModel",
+			"displayName": "Process Model",
+			"isExpanded": true
+		  },
+		  {
+			"name": "Recycling",
+			"displayName": "Recycling",
+			"isExpanded": true
+		  }
+	  ],
+	"inputs": [
+	  {
+		"name": "servername",
+		"type": "string",
+		"label": "Server name",
+		"defaultValue": "",
+		"required": true,
+		"helpMarkDown": "The name of the server where the application pool is running"
+	  },
+	  {
+		"name": "apppoolname",
+		"type": "string",
+		"label": "Application Pool name",
+		"defaultValue": "",
+		"required": true,
+		"helpMarkDown": "Name of the application pool to apply changes to"
+	  },
+	  {
+		"name": "username",
+		"type": "string",
+		"label": "Username",
+		"defaultValue": "",
+		"required": true,
+		"helpMarkDown": "User used for remote login"
+	  },
+	  {
+		"name": "password",
+		"type": "string",
+		"label": "Password",
+		"defaultValue": "",
+		"required": true,
+		"helpMarkDown": "Password of the user used for remote login"
+	  },
+	  {
+		"name": "cpulimit",
+		"type": "string",
+		"label": "Limit (percent)",
+		"defaultValue": "0",
+		"required": false,
+		"helpMarkDown": "Configures the maximum percentage of CPU time that the worker processes in an application pool are allowed to consume over a period of time as indicated by the CPU Limit Interval property. If the limit set by the CPU Limit property is exceeded, an event is written to the event log and an optional set of events can be triggered as determined by the CPU Limit Action property. Setting the value of this property to 0 disables limiting the worker processes to a percentage of CPU time.",
+		"groupName": "CPU"
+	  },
+	  {
+		"name": "cpulimitaction",
+		"type": "pickList",
+		"label": "Limit Action",
+		"defaultValue": "NoAction",
+		"required": false,
+		"helpMarkDown": "If set to 'Noaction', an event log entry is generated. If set to 'KillW3WP', the application pool is shut down for the duration of the reset interval and an event log entry is generated. If set to 'Throttle', the CPU consumption is limited to the value set in Limit. Limit Interval is not used and an event log entry is generated. If set to 'ThrottleUnderLoad', the CPU consumption is limited only when there is contention on CPU. Limit Interval is not used and an event log entry is generated.",
+		"groupName": "CPU",
+		"options": {
+		  "NoAction": "NoAction",
+		  "KillW3wp": "KillW3wp",
+		  "Throttle": "Throttle",
+		  "ThrottleUnderLoad": "ThrottleUnderLoad"
+		}
+	  },
+	  {
+		"name": "processmodelidletimeoutminutes",
+		"type": "string",
+		"label": "Idle Time-out (minutes)",
+		"defaultValue": "20",
+		"required": false,
+		"helpMarkDown": "Amount of time (in minutes) a worker process will remain idle before it shuts down. A worker process is idle if it is not processing requests and no new requests are received.",
+		"groupName": "ProcessModel"
+	  },
+	  {
+		"name": "processmodelloaduserprofile",
+		"type": "boolean",
+		"label": "Load User Profile",
+		"defaultValue": "true",
+		"required": false,
+		"helpMarkDown": "This setting specifies whether IIS loads the user profile for an application pool identity. When this value is true, IIS loads the user profile for the application pool identity. Set this value to false when you require the IIS 6.0 behavior of not loading the user profile for the application pool identity.",
+		"groupName": "ProcessModel"
+	  },
+	  {
+		"name": "recyclingregulartimeinterval",
+		"type": "string",
+		"label": "Regular Time Interval (minutes)",
+		"defaultValue": "1740",
+		"required": false,
+		"helpMarkDown": "Period of time (in minutes) after which an application pool will recycle. A value of 0 means the application pool does not recycle on a regular interval.",
+		"groupName": "Recycling"
+	  },
+	  {
+		"name": "recyclingspecifictimes",
+		"type": "multiLine",
+		"label": "Specific Times",
+		"defaultValue": "",
+		"required": false,
+		"helpMarkDown": "A set of specific local times, in 24 hour format, when the application pool is recycled. Format to be entered is hh:mm:ss, multiple entries should be put on separate lines.",
+		"groupName": "Recycling"
+	  }
+	],
+	"execution": {
+	  "PowerShell3": {
+		"target": "task.ps1"
+	  }
+	}
+  }

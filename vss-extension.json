@@ -1,0 +1,50 @@
+{
+    "manifestVersion": 1,
+    "id": "Delta-N-AdvancedAppPool",
+    "version": "0.1.0",
+    "name": "IIS Advanced AppPool Settings",
+    "publisher": "Delta-N",
+    "description": "Configure advanced IIS Application Pool Settings",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "icons": {
+        "default": "icon.png"
+    },
+    "scopes": [
+        "vso.build"
+    ],
+    "categories": [
+        "Build and release"
+    ],
+    "content": {
+        "details": {
+            "path": "readme.md"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/Delta-N/BldTsk-AdvAppPoolSettings"
+    },
+    "contributions": [
+        {
+            "id": "AppPoolSettings",
+            "type": "ms.vss-distributed-task.task",
+            "description": "Sets advanced application pool settings",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "AppPoolSettings"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "task",
+            "addressable": true
+        }
+    ]
+}
